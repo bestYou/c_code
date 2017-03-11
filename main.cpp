@@ -1,56 +1,67 @@
 #include <iostream>
-
+#include <string>
 using namespace std;
 
-class Account{
+class Employee{
 public:
-    Account(int first_user_balance ){
-        if(first_user_balance >= 0 ){
-            account_balance = first_user_balance;
-        }
-        else{
-            account_balance = 0;
-            cout << "Error! Invalid initial balance value " << endl;
+    Employee(string name,string surname,int money){
+        this->name = name;
+        this->surname = surname;
+        this->money = money;
+    }
+
+    void set_name(string name){
+        this->name = name;
+    }
+    string get_name(){
+        return name;
+    }
+
+    void set_surname(string surname){
+        this->surname = surname;
+    }
+    string get_surname(){
+        return surname;
+    }
+
+    void set_money(int money){
+        if(money>0)
+            this->money = money;
+        else {
+            money = 0;
+            cout << "error!Please input money again";
         }
     }
-    void credit(int add_num){       // add
-        if(add_num >= 0){
-            account_balance += add_num;
-        }
-    }
-    void debit(int reduce_num){        // reduce
-        if(reduce_num >= 0  &&  reduce_num <=account_balance){
-            account_balance -= reduce_num;
-        }
-        else{
-            cout << " The number of withdrawals exceeds the balance!" << endl;
-        }
-    }
-    int getBalance(){   // account banlance
-        return account_balance;
+    int get_money(){
+        return money;
     }
 
 private:
-    int account_balance;
-
+    string name;
+    string surname;
+    int money;
 };
 
 int main()
 {
-    Account account(2000);
-    cout << "Account balance1 is " << account.getBalance() << endl;
+    Employee employee_1("Daming","You",80000);
+    Employee employee_2("Tom","You",90000);
 
-    Account account2(10);
-    cout << "Account balance2 is " << account2.getBalance() << "\n" << endl;
+    cout << "employee 1 :" << "\n"
+         << "   Name:" << employee_1.get_surname() <<" "<< employee_1.get_name() << "\n"
+         << "   Annual salary:" << employee_1.get_money() * 12 << endl;
+    cout << "employee 2 :" << "\n"
+         << "   Name:" << employee_2.get_surname() <<" "<< employee_2.get_name() << "\n"
+         << "   Annual salary:" << employee_2.get_money() * 12 << "\n" <<endl;
 
-    cout << "Add money ,num is 1000" << endl;
-    account.credit(1000);
-    cout << "Account balance1 is " << account.getBalance() << "\n" << endl;
+    cout << "What? Boss wants a raise!" << "\n" << endl;
 
-    cout << "Reduce money ,num is 100" << endl;
-    account.debit(100);
-    cout << "Account balance1 is " << account.getBalance() << "\n" << endl;
-
+    cout << "employee 1 :" << "\n"
+         << "   Name:" << employee_1.get_surname() <<" "<< employee_1.get_name() << "\n"
+         << "   Annual salary:" << employee_1.get_money() * 12 + employee_1.get_money() * 12 * 0.1 << endl;
+    cout << "employee 2 :" << "\n"
+         << "   Name:" << employee_2.get_surname() <<" "<< employee_2.get_name() << "\n"
+         << "   Annual salary:" << employee_2.get_money() * 12 + employee_1.get_money() * 12 * 0.1 << endl;
 
     //cout << "Hello world!" << endl;
     return 0;
